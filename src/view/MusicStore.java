@@ -1,4 +1,6 @@
-package musicstore;
+package view;
+
+import model.*;
 
 public class MusicStore {
     
