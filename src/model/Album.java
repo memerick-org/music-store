@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Album {
     private String title;
     private String artist;
+    private String date;
+    private String genre;
     private ArrayList<Song> songs;
 
     public Album(String title, String artist, ArrayList<Song> songs) {
@@ -12,5 +14,26 @@ public class Album {
         this.artist = artist;
         ArrayList<Song> temp = new ArrayList<Song>(songs);
         this.songs = songs;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public ArrayList<Song> getSongs() {
+        ArrayList<Song> copy = new ArrayList<Song>(songs);
+        return copy;
     }
 }
