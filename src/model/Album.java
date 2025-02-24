@@ -15,7 +15,22 @@ public class Album {
         ArrayList<Song> temp = new ArrayList<Song>(songs);
         this.songs = songs;
     }
-}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 
     public ArrayList<Song> getSongs() {
         ArrayList<Song> copy = new ArrayList<Song>(songs);
