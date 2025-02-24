@@ -13,4 +13,5 @@ public class Album {
         ArrayList<Song> temp = new ArrayList<Song>(songs);
         this.songs = songs;
     }
+    
 }
