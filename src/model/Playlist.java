@@ -11,4 +11,8 @@ public class Playlist {
         ArrayList<Song> temp = new ArrayList(songs);
         this.songs = temp;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
