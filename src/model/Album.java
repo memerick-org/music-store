@@ -36,4 +36,8 @@ public class Album {
         ArrayList<Song> copy = new ArrayList<Song>(songs);
         return copy;
     }
+
+    public String toString() {
+        return "Album: " + title + "\nArtist: " + artist + "\nGenre: " + genre + "\nDate: " + date;
+    }
 }

@@ -1,12 +1,12 @@
 package model;
 
 public class Song {
-    private Album album;
+    private String album;
     private String title;
     private String artist;
     private boolean favorite;
 
-    public Song(Album album, String title, String artist) {
+    public Song(String album, String title, String artist) {
         this.album = album;
         this.title = title;
         this.artist = artist;
@@ -16,6 +16,10 @@ public class Song {
     // Getters
     public String getTitle() {
         return title;
+    }
+
+    public String getAlbum() {
+        return album;
     }
 
     public String getArtist() {

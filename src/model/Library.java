@@ -25,4 +25,9 @@ public class Library {
         }
         return allSongs;
     }
+
+    public ArrayList<Album> getAllAlbums() {
+        ArrayList<Album> allAlbums = new ArrayList<>(albums);
+        return allAlbums;
+    }
 }

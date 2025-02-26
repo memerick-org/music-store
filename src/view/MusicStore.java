@@ -72,7 +72,7 @@ public class MusicStore {
         Scanner scnr = new Scanner(System.in);
         System.out.println("Enter the name of the song to favorite");
         String input = scnr.nextLine();
-        ArrayList<Song> searchResults = searchByName(input);
+        ArrayList<Song> searchResults = searchSongByName(input);
         for (Song song : searchResults) {
             song.setFavorite(true);
         }
@@ -83,13 +83,56 @@ public class MusicStore {
 
     }
 
-    public ArrayList<Song> searchByName(String name) {
+    public ArrayList<Song> searchSongByName(String input) {
         ArrayList<Song> results = new ArrayList<>();
         ArrayList<Song> list = store.getAllSongs();
 
         for (Song song : list) {
-            if (song.getTitle() ==  name) {
+            if (song.getTitle() ==  input) {
                 results.add(song);
+            }
+        }
+
+        return results;
+    }
+
+    public ArrayList<Song> searchSongByArtist(String input) {
+        ArrayList<Song> results = new ArrayList<>();
+        ArrayList<Song> list = store.getAllSongs();
+
+        for (Song song : list) {
+            if (song.getArtist() == input) {
+                results.add(song);
+            }
+        }
+
+        return results;
+    }
+
+    /* Warning: Only Returns Shallow Copy */
+
+    public ArrayList<Album> searchAlbumByName(String input) {
+        ArrayList<Album> results = new ArrayList<>();
+        ArrayList<Album> list = store.getAllAlbums();
+
+        for (Album album : list) {
+            if (album.getTitle() == input) {
+                results.add(album);
+            }
+        }
+
+        return results;
+    }
+
+    /* Warning: Only Returns Shallow Copy */
+
+    public ArrayList<Album> searchAlbumByArtist(String input) {
+        ArrayList<Album> results = new ArrayList<>();
+        ArrayList<Album> list = store.getAllAlbums();
+
+        for (Album album : list) {
+            if (album.getArtist() == input) {
+                results.add(album);
             }
         }
 
