@@ -30,4 +30,23 @@ public class Library {
         ArrayList<Album> allAlbums = new ArrayList<>(albums);
         return allAlbums;
     }
+
+    public ArrayList<Playlist> getAllPlaylists() {
+        if (playlist == null) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(playlist);
+    }
+
+    public ArrayList<Song> getAllFavoriteSongs() {
+        ArrayList<Song> allFavoriteSongs = new ArrayList<Song>();
+        for (Album temp : albums) {
+            for (Song song : temp.getSongs()) {
+                if (song.isFavorite()) {
+                    allFavoriteSongs.add(song);
+                }
+            }
+        }
+        return allFavoriteSongs;
+    }
 }
