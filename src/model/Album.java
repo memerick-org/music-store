@@ -13,7 +13,7 @@ public class Album {
         this.title = title;
         this.artist = artist;
         ArrayList<Song> temp = new ArrayList<Song>(songs);
-        this.songs = songs;
+        this.songs = temp;
     }
 
     public String getTitle() {

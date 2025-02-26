@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class MusicStore {
 
     /* TEMPORARY, REPLACE WITH LIBRARY */
-    Library store = new Library("store", new ArrayList<>());
-    Library user = new Library("user", new ArrayList<>());
+    Library store = new Library(new ArrayList<>());
+    Library user = new Library(new ArrayList<>());
     /* TEMPORARY, REPLACE WITH LIBRARY */
 
     public void mainLoop() {
@@ -46,6 +46,16 @@ public class MusicStore {
                 case "exit":
                     System.out.println("Exiting Program!");
                     return;
+                case "help":
+                    System.out.println("Available Commands:");
+                    System.out.println("- search    : Search for songs or albums in the database.");
+                    System.out.println("- add       : Add a song or album to your personal library.");
+                    System.out.println("- get       : Retrieve lists of items from your library");
+                    System.out.println("- playlist  : Manage your playlists:");
+                    System.out.println("- favorite  : Mark a song as a favorite.");
+                    System.out.println("- rate      : Rate a song and provide a score.");
+                    System.out.println("- exit      : Exit the program.");
+                    System.out.println("- help      : Display this help message.");
                 default:
                     System.out.println("Unknown Command!");
             }
