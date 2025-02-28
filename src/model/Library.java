@@ -7,8 +7,12 @@ public class Library {
     private ArrayList<Playlist> playlist;
 
     public Library(ArrayList<Album> albums) {
-        ArrayList<Album> temp = new ArrayList(albums);
-        this.albums = temp;
+      
+        if (albums !=null ){
+            this.albums= new ArrayList<>(albums);
+        }else{
+            this.albums= new ArrayList<>();
+        }
         this.playlist = null;
     }
 
