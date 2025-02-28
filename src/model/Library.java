@@ -13,7 +13,7 @@ public class Library {
         }else{
             this.albums= new ArrayList<>();
         }
-        this.playlist = null;
+        this.playlist = new ArrayList<>();
     }
 
     public ArrayList<Song> getAllSongs() {
