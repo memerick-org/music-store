@@ -47,4 +47,8 @@ public class Library {
         }
         return allFavoriteSongs;
     }
+    public void addPlaylist(Playlist playList){
+        playlist.add(playList);
+    }
+
 }

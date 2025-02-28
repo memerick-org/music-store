@@ -24,7 +24,7 @@ public class Song {
     }
 
     // Getters
-    public String getTitle() {
+    public  String getTitle() {
         return title;
     }
 

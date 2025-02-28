@@ -114,6 +114,7 @@ public class MusicStore {
     }
 
     public void addItem(Scanner scnr, String type) {
+        // look like searchItem
         
     }
 
@@ -123,6 +124,59 @@ public class MusicStore {
 
     public void playlist(Scanner scnr) {
         // Implement playlist management logic
+        
+        System.out.println("Would you like to make a playlist or edit a playlist?");
+        String input= scnr.nextLine().trim().toLowerCase();
+
+        switch (input){
+            case "make":
+            makePlaylist(scnr, "make");
+            break;
+            case "edit":
+            editPlaylist(scnr, "edit",  "Unknown Album");
+            break;
+            default:
+                System.out.println("Error. Unrecognized command.");
+        }
+    }
+    public void makePlaylist(Scanner scnr, String type){
+        System.out.println("Making PlayList01");
+        Playlist newPlaylist= new Playlist(type, new ArrayList<>());
+        user.addPlaylist(newPlaylist);
+
+
+    }
+    public void editPlaylist(Scanner scnr, String type, String album){
+            System.out.println("Which playlist will you like to edit");
+            String input = scnr.nextLine().trim().toLowerCase();
+            ArrayList<Playlist> allPlaylists= store.getAllPlaylists(); 
+            Playlist selectedPlaylist= null;
+            for (Playlist p: allPlaylists){
+                if (p.getName().equals(input)){
+                    selectedPlaylist= p;
+                    break;
+                }
+            }
+            if (selectedPlaylist== null){
+                System.out.println("Error: Playlist not found\n");
+            }
+            System.out.println("Would you like to add or remove a song? ");
+            String action= scnr.nextLine().trim().toLowerCase();
+            switch (action){
+                case "add":
+                System.out.println("Enter song title: ");
+                String title=scnr.nextLine().trim();
+                System.out.println("Enter artist name");
+                String artist = scnr.nextLine().trim();
+    
+                selectedPlaylist.addSong(new Song("Unknown Album",title, artist));
+                break;
+                case "remove":
+                System.out.println("Enter song title: ");
+                String removeTitle=scnr.nextLine().trim();
+                selectedPlaylist.removeSong(removeTitle);
+                break;
+        }
     }
 
     public void favorite(Scanner scnr) {
