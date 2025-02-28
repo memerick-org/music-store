@@ -20,31 +20,26 @@ public class MusicStore {
 
             switch (input) {
                 case "search":
-                    // TODO: Search Songs or Albums
+                    search(scnr);
                     break;
                 case "add":
-                    // TODO: Add song or album to user library
+                    add(scnr);
                     break;
                 case "get": 
-                    // TODO: Get list from user library of
-                    // SONGS
-                    // ARTISTS
-                    // ALBUMS
-                    // PLAYLISTS
-                    // FAVORITES
+                    get(scnr);
                     break;
                 case "playlist":
-                    // TODO: Create Playlist
-                    // TODO: Add or Remove songs from playlist
+                    playlist(scnr);
                     break;
                 case "favorite":
-                    favorite();
+                    favorite(scnr);
                     break;
                 case "rate":
-                    // TODO: Song rating
+                    rate(scnr);
                     break;
                 case "exit":
                     System.out.println("Exiting Program!");
+                    scnr.close();
                     return;
                 case "help":
                     System.out.println("Available Commands:");
@@ -62,34 +57,84 @@ public class MusicStore {
         }
     }
 
-    public void search() {
+    public void search(Scanner scnr) {
+        System.out.println("Would you like to search for a 'song' or 'album'?");
+        String input = scnr.nextLine().trim().toLowerCase();
 
+        switch (input) {
+            case "song":
+                searchItem(scnr, "song");
+                break;
+            case "album":
+                searchItem(scnr, "album");
+                break;
+            default:
+                System.out.println("Error. Unrecognized command.");
+        }
     }
 
-    public void add() {
+    private void searchItem(Scanner scnr, String type) {
+        System.out.println("Enter the title or artist of the " + type + " you are looking for:");
+        String input = scnr.nextLine().trim();
 
+        ArrayList<?> titleMatches = type.equals("song") ? searchSongByName(input) : searchAlbumByName(input);
+        ArrayList<?> artistMatches = type.equals("song") ? searchSongByArtist(input) : searchAlbumByArtist(input);
+
+        if (titleMatches.isEmpty() && artistMatches.isEmpty()) {
+            System.out.println("No exact matches found for the " + type + "!");
+            return;
+        }
+
+        if (!titleMatches.isEmpty()) {
+            System.out.println("Results with matching **Title**:");
+            titleMatches.forEach(item -> System.out.println(item.toString()));
+        }
+
+        if (!artistMatches.isEmpty()) {
+            System.out.println("Results with matching **Artist**:");
+            artistMatches.forEach(item -> System.out.println(item.toString()));
+        }
     }
 
-    public void get() {
 
+    public void add(Scanner scnr) {
+        System.out.println("Would you like to add a 'song' or 'album' to your Library?");
+        String input = scnr.nextLine().trim().toLowerCase();
+
+        switch (input) {
+            case "song":
+                addItem(scnr, "song");
+                break;
+            case "album":
+                addItem(scnr, "album");
+                break;
+            default:
+                System.out.println("Error. Unrecognized command.");
+        }
     }
 
-    public void playlist() {
-
+    public void addItem(Scanner scnr, String type) {
+        
     }
 
-    public void favorite() {
-        Scanner scnr = new Scanner(System.in);
+    public void get(Scanner scnr) {
+        // Implement retrieval logic for user library
+    }
+
+    public void playlist(Scanner scnr) {
+        // Implement playlist management logic
+    }
+
+    public void favorite(Scanner scnr) {
         System.out.println("Enter the name of the song to favorite");
         String input = scnr.nextLine();
         ArrayList<Song> searchResults = searchSongByName(input);
         for (Song song : searchResults) {
             song.setFavorite(true);
         }
-        scnr.close();
     }
 
-    public void rate() {
+    public void rate(Scanner scnr) {
 
     }
 
