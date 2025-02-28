@@ -64,7 +64,7 @@ public class MusicStore {
         Scanner scnr = new Scanner(System.in);
         while (true) {
             System.out.println("Enter desired command. Type 'exit' to quit.");
-            String input = scnr.nextLine();
+            String input = scnr.nextLine().trim();
 
             switch (input) {
                 case "search":
@@ -99,6 +99,7 @@ public class MusicStore {
                     System.out.println("- rate      : Rate a song and provide a score.");
                     System.out.println("- exit      : Exit the program.");
                     System.out.println("- help      : Display this help message.");
+                    break;
                 default:
                     System.out.println("Unknown Command!");
             }
@@ -196,7 +197,7 @@ public class MusicStore {
 
     public void get(Scanner scnr) {
         System.out.println("Please enter what you would like to get from the User Library: ");
-        String input = scnr.nextLine();
+        String input = scnr.nextLine().trim();
 
         switch(input) {
             case "song":
@@ -291,7 +292,7 @@ public class MusicStore {
 
     public void favorite(Scanner scnr) {
         System.out.println("Enter the name of the song to favorite:");
-        String input = scnr.nextLine();
+        String input = scnr.nextLine().trim();
         ArrayList<Song> searchResults = searchSongByName(input);
 
         if (searchResults.isEmpty()) {
@@ -309,10 +310,10 @@ public class MusicStore {
 
         try {
             choice = scnr.nextInt();
-            scnr.nextLine();
+            scnr.nextLine().trim();
         } catch (Exception e) {
             System.out.println("Invalid input. Returning to main menu.");
-            scnr.nextLine();
+            scnr.nextLine().trim();
             return;
         }
 
@@ -328,7 +329,7 @@ public class MusicStore {
 
     public void rate(Scanner scnr) {
         System.out.println("Please enter the name of the song you wish to rate:");
-        String input = scnr.nextLine();
+        String input = scnr.nextLine().trim();
         ArrayList<Song> searchResults = searchSongByName(input);
         
         if (searchResults.isEmpty()) {
@@ -346,7 +347,7 @@ public class MusicStore {
         
         try {
             choice = scnr.nextInt();
-            scnr.nextLine();
+            scnr.nextLine().trim();
         } catch (Exception e) {
             System.out.println("Invalid input. Returning to main menu.");
             scnr.nextLine();
@@ -364,14 +365,14 @@ public class MusicStore {
         
         try {
             int rating = scnr.nextInt();
-            scnr.nextLine();
+            scnr.nextLine().trim();
             selectedSong.setRating(rating);
             System.out.println("Successfully rated \"" + selectedSong.getTitle() + "\" with a " + rating + "!");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage() + " Returning to main menu.");
         } catch (Exception e) {
             System.out.println("Invalid rating input. Returning to main menu.");
-            scnr.nextLine();
+            scnr.nextLine().trim();
         }
     }
 
