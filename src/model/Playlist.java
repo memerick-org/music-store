@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Playlist {
     private String name;
-    private ArrayList<Song> songs;
+    private  ArrayList<Song> songs;
 
     public Playlist(String name, ArrayList<Song> songs) {
         this.name = name;
@@ -25,5 +25,17 @@ public class Playlist {
         }
         
         return sb.toString();
+    }
+
+    public void addSong(Song song ){
+        songs.add(song);
+    }
+    public void removeSong (String title){
+        title= title.trim().toLowerCase();
+        for (Song song: songs){
+            if (song.getTitle().equals(title)){
+                songs.remove(song);
+            }
+        }
     }
 }

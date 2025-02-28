@@ -64,11 +64,16 @@ public class Library {
         return allFavoriteSongs;
     }
 
+
     public void addAlbum(Album album) {
         albums.add(new Album(album));
     }
 
     public void addSong(Song song) {
         
+    }
+
+    public void addPlaylist(Playlist playList){
+        playlist.add(playList);
     }
 }
