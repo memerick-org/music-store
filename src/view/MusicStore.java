@@ -1,16 +1,64 @@
 package view;
 
 import model.*;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MusicStore {
+    public Library store;
+    public Library user;
 
-    /* TEMPORARY, REPLACE WITH LIBRARY */
-    Library store = new Library(new ArrayList<>());
-    Library user = new Library(new ArrayList<>());
-    /* TEMPORARY, REPLACE WITH LIBRARY */
+    public MusicStore() {
+        File folder= new File("/Users/galiramirez/Downloads/LA 1/albums");
+        ArrayList<Album> albumList = readfilesFromFolder(folder);
+        this.store = new Library(new ArrayList<Album>(albumList));
+        this.user = new Library(new ArrayList<Album>());
+    }
+     
+    public static ArrayList<Album> readfilesFromFolder(File folder) {
+        File[] files = folder.listFiles();
+        ArrayList<Album> albumList = new ArrayList<>();
+        
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().endsWith(".txt")) {
+                    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                        String line = "", title = "", artist = "", genre = "", date = "";
+                        ArrayList<Song> songList = new ArrayList<>();
+
+                        if ((line = reader.readLine()) != null) {
+                            line = line.trim();
+                            String[] firstLine = line.split(",");
+                            
+                            title = firstLine[0].trim();
+                            artist = firstLine[1].trim();
+                            genre = firstLine[2].trim();
+                            date = firstLine[3].trim();
+                        }
+
+                        while ((line = reader.readLine()) != null) {
+                            line = line.trim();
+                            if (!line.isEmpty()) {
+                                Song song = new Song(null, line, artist);
+                                songList.add(song);
+                            }
+                        }
+
+                        Album album = new Album(title, artist, songList, genre, date);
+                        albumList.add(album);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        
+        return albumList;
+    }
 
     public void mainLoop() {
         Scanner scnr = new Scanner(System.in);
@@ -114,12 +162,74 @@ public class MusicStore {
     }
 
     public void addItem(Scanner scnr, String type) {
-        // look like searchItem
-        
+
+        if (type.equals("song")) {
+            System.out.println("Enter the song name:");
+            String songName = scnr.nextLine().trim();
+            
+            // Search for the song in the store
+            for (Song song : store.getAllSongs()) {
+                if (song.getTitle().equalsIgnoreCase(songName)) {
+
+                    System.out.println("Song added to your library!");
+                    return;
+                }
+            }
+            System.out.println("Song not found in store.");
+            
+        } else if (type.equals("album")) {
+            System.out.println("Enter the album name:");
+            String albumName = scnr.nextLine().trim();
+            
+            // Search for the album in the store
+            for (Album album : store.getAllAlbumsDeepCopy()) {
+                if (album.getTitle().equalsIgnoreCase(albumName)) {
+                    user.addAlbum(album);
+                    System.out.println("Album added to your library!");
+                    return;
+                }
+            }
+            System.out.println("Album not found in store.");
+        }
     }
 
+
     public void get(Scanner scnr) {
-        // Implement retrieval logic for user library
+        System.out.println("Please enter what you would like to get from the User Library: ");
+        String input = scnr.nextLine();
+
+        switch(input) {
+            case "song":
+                ArrayList<Song> songs = user.getAllSongs();
+                for (Song song : songs) {
+                    System.out.println(song.toString() + "\n");
+                }
+                break;
+            case "artist":
+                ArrayList<String> artists = user.getAllArtists();
+                for (String artist : artists) {
+                    System.out.println(artist + "\n");
+                }
+                break;
+            case "album":
+                ArrayList<Album> albums = user.getAllAlbums();
+                for (Album album : albums) {
+                    System.out.println(album.toString() + "\n");
+                }
+                break;
+            case "playlist":
+                ArrayList<Playlist> playlists = user.getAllPlaylists();
+                for (Playlist playlist : playlists) {
+                    System.out.println(playlist.toString() + "\n");
+                }
+                break;
+            case "favorites":
+                ArrayList<Song> favorites = user.getAllFavoriteSongs();
+                for (Song favorite : favorites) {
+                    System.out.println(favorite.toString());
+                }
+                
+        }
     }
 
     public void playlist(Scanner scnr) {
@@ -180,28 +290,91 @@ public class MusicStore {
     }
 
     public void favorite(Scanner scnr) {
-        System.out.println("Enter the name of the song to favorite");
+        System.out.println("Enter the name of the song to favorite:");
         String input = scnr.nextLine();
         ArrayList<Song> searchResults = searchSongByName(input);
-        for (Song song : searchResults) {
-            song.setFavorite(true);
+
+        if (searchResults.isEmpty()) {
+            System.out.println("Error, nothing found. Returning to main menu.");
+            return;
         }
+
+        System.out.println("Matching songs:");
+        for (int i = 0; i < searchResults.size(); i++) {
+            System.out.println((i + 1) + ". " + searchResults.get(i).getTitle());
+        }
+
+        System.out.print("Please enter the number of the song you wish to favorite: ");
+        int choice;
+
+        try {
+            choice = scnr.nextInt();
+            scnr.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Returning to main menu.");
+            scnr.nextLine();
+            return;
+        }
+
+        if (choice < 1 || choice > searchResults.size()) {
+            System.out.println("Invalid selection. Returning to main menu.");
+            return;
+        }
+
+        Song selectedSong = searchResults.get(choice - 1);
+        selectedSong.setFavorite(true);
+        System.out.println("\"" + selectedSong.getTitle() + "\" has been added to your favorites!");
     }
 
     public void rate(Scanner scnr) {
-//   public void rateSong(String title, int rating){
-//     for (Song song: songs){
-//       if (song.getTitle().toLowerCase().equals(title.toLowerCase())){
-//         song.rateSong(rating);
-//         for (Song s: songs){
-//           System.out.print(s);
-//         }
-//         return;
-//         }
-//       }
-//       throw new IllegalArgumentException("Song not found:" + title);
-//     }
+        System.out.println("Please enter the name of the song you wish to rate:");
+        String input = scnr.nextLine();
+        ArrayList<Song> searchResults = searchSongByName(input);
+        
+        if (searchResults.isEmpty()) {
+            System.out.println("Error, nothing found. Returning to main menu.");
+            return;
+        }
+
+        System.out.println("Matching songs:");
+        for (int i = 0; i < searchResults.size(); i++) {
+            System.out.println((i + 1) + ". " + searchResults.get(i).getTitle());
+        }
+
+        System.out.print("Please enter the number of the song you wish to rate: ");
+        int choice;
+        
+        try {
+            choice = scnr.nextInt();
+            scnr.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Returning to main menu.");
+            scnr.nextLine();
+            return;
+        }
+
+        if (choice < 1 || choice > searchResults.size()) {
+            System.out.println("Invalid selection. Returning to main menu.");
+            return;
+        }
+
+        Song selectedSong = searchResults.get(choice - 1);
+        
+        System.out.print("Please enter your rating (1-5): ");
+        
+        try {
+            int rating = scnr.nextInt();
+            scnr.nextLine();
+            selectedSong.setRating(rating);
+            System.out.println("Successfully rated \"" + selectedSong.getTitle() + "\" with a " + rating + "!");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + " Returning to main menu.");
+        } catch (Exception e) {
+            System.out.println("Invalid rating input. Returning to main menu.");
+            scnr.nextLine();
+        }
     }
+
 
     public ArrayList<Song> searchSongByName(String input) {
         ArrayList<Song> results = new ArrayList<>();
