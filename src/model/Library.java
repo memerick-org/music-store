@@ -24,9 +24,25 @@ public class Library {
         return allSongs;
     }
 
+    public ArrayList<String> getAllArtists() {
+        ArrayList<String> allArtists = new ArrayList<String>();
+        for (Album album : albums) {
+            allArtists.add(album.getArtist());
+        }
+        return allArtists;
+    }
+
     public ArrayList<Album> getAllAlbums() {
         ArrayList<Album> allAlbums = new ArrayList<>(albums);
         return allAlbums;
+    }
+
+    public ArrayList<Album> getAllAlbumsDeepCopy() {
+        ArrayList<Album> deepCopyAlbums = new ArrayList<>();
+        for (Album album : albums) {
+            deepCopyAlbums.add(new Album(album)); // Assumes Album has a copy constructor
+        }
+        return deepCopyAlbums;
     }
 
     public ArrayList<Playlist> getAllPlaylists() {
@@ -46,5 +62,13 @@ public class Library {
             }
         }
         return allFavoriteSongs;
+    }
+
+    public void addAlbum(Album album) {
+        albums.add(new Album(album));
+    }
+
+    public void addSong(Song song) {
+        
     }
 }
