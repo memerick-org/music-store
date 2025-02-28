@@ -9,6 +9,17 @@ public class Album {
     private String genre;
     private ArrayList<Song> songs;
 
+    public Album(Album other) {
+        this.title = other.title;
+        this.artist = other.artist;
+        this.date = other.date;
+        this.genre = other.genre;
+        this.songs = new ArrayList<>();
+        for (Song song : other.songs) {
+            this.songs.add(new Song(song));
+        }
+    }
+
     public Album(String title, String artist, ArrayList<Song> songs, String genre, String date) {
         this.title = title;
         this.artist = artist;
