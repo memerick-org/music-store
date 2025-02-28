@@ -72,12 +72,11 @@ public class MusicStore {
                 System.out.println("Error. Unrecognized command.");
         }
     }
-    
+
     private void searchItem(Scanner scnr, String type) {
         System.out.println("Enter the title or artist of the " + type + " you are looking for:");
         String input = scnr.nextLine().trim();
 
-        // Determine whether to search for songs or albums
         ArrayList<?> titleMatches = type.equals("song") ? searchSongByName(input) : searchAlbumByName(input);
         ArrayList<?> artistMatches = type.equals("song") ? searchSongByArtist(input) : searchAlbumByArtist(input);
 
@@ -99,7 +98,23 @@ public class MusicStore {
 
 
     public void add(Scanner scnr) {
-        // Implement add song/album logic
+        System.out.println("Would you like to add a 'song' or 'album' to your Library?");
+        String input = scnr.nextLine().trim().toLowerCase();
+
+        switch (input) {
+            case "song":
+                addItem(scnr, "song");
+                break;
+            case "album":
+                addItem(scnr, "album");
+                break;
+            default:
+                System.out.println("Error. Unrecognized command.");
+        }
+    }
+
+    public void addItem(Scanner scnr, String type) {
+        
     }
 
     public void get(Scanner scnr) {
