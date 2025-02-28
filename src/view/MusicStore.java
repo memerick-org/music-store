@@ -135,7 +135,18 @@ public class MusicStore {
     }
 
     public void rate(Scanner scnr) {
-
+//   public void rateSong(String title, int rating){
+//     for (Song song: songs){
+//       if (song.getTitle().toLowerCase().equals(title.toLowerCase())){
+//         song.rateSong(rating);
+//         for (Song s: songs){
+//           System.out.print(s);
+//         }
+//         return;
+//         }
+//       }
+//       throw new IllegalArgumentException("Song not found:" + title);
+//     }
     }
 
     public ArrayList<Song> searchSongByName(String input) {

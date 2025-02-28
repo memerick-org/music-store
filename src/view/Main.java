@@ -96,26 +96,3 @@ public class Main {
             return albumList;
         }  
     }
-                 
-                
-
-
-                    
-
-
-
-                        
-
-                    
-                    
-                
-            
-        
-    
-
-        // TODO - INDEX ENTIRE MUSIC STORE
-
-        // TODO - WHILE LOOP COMMAND PROCESSING
-    
-
-    // TODO - COMMAND FUNCTIONS
