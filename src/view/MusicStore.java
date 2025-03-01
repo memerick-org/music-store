@@ -49,6 +49,7 @@ public class MusicStore {
                         }
 
                         Album album = new Album(title, artist, songList, genre, date);
+                        System.out.println(album.toString());
                         albumList.add(album);
                     } catch (IOException e) {
                         e.printStackTrace();

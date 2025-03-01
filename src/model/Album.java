@@ -25,6 +25,8 @@ public class Album {
         this.artist = artist;
         ArrayList<Song> temp = new ArrayList<Song>(songs);
         this.songs = temp;
+        this.genre = genre;
+        this.date = date;
     }
 
     public void addSong(Song song) {
