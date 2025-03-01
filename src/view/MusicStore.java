@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MusicStore {
-    public Library store;
-    public Library user;
+    private Library store;
+    private Library user;
 
     public MusicStore() {
-        File folder= new File("/Users/galiramirez/Downloads/LA 1/albums");
+        File folder= new File("albums/");
         ArrayList<Album> albumList = readfilesFromFolder(folder);
         store = new Library(new ArrayList<Album>(albumList));
         user = new Library(new ArrayList<Album>());
