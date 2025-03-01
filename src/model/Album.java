@@ -29,6 +29,13 @@ public class Album {
         this.date = date;
     }
 
+    public void addSong(Song song) {
+        if (songs.contains(song)) {
+            return;
+        }
+        songs.add(song);
+    }
+
     public String getTitle() {
         return title;
     }
@@ -54,6 +61,13 @@ public class Album {
 
     public String toString() {
         return "Album: " + title + "\nArtist: " + artist + "\nGenre: " + genre + "\nDate: " + date;
+    }
+
+    public boolean equals(Album album) {
+        if (this.title.equals(album.title)) {
+            return true;
+        }
+        return false;
     }
 
 }

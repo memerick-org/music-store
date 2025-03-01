@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MusicStore {
-    public Library store;
-    public Library user;
+    private Library store;
+    private Library user;
 
     public MusicStore() {
-        File folder= new File("/Users/galiramirez/Downloads/LA 1/albums");
+        File folder= new File("albums/");
         ArrayList<Album> albumList = readfilesFromFolder(folder);
         store = new Library(new ArrayList<Album>(albumList));
         user = new Library(new ArrayList<Album>());
@@ -172,7 +172,9 @@ public class MusicStore {
             // Search for the song in the store
             for (Song song : store.getAllSongs()) {
                 if (song.getTitle().equalsIgnoreCase(songName)) {
-                    
+                    Album album = (searchAlbumByName(song.getAlbum())).get(0);
+                    album.addSong(song);
+                    user.addAlbum(album);
                     System.out.println("Song added to your library!");
                     return;
                 }
@@ -186,6 +188,7 @@ public class MusicStore {
             // Search for the album in the store
             for (Album album : store.getAllAlbumsDeepCopy()) {
                 if (album.getTitle().equalsIgnoreCase(albumName)) {
+                    user.getAllAlbums().remove(album);
                     user.addAlbum(album);
                     System.out.println("Album added to your library!");
                     return;
