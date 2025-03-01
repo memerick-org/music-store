@@ -66,6 +66,9 @@ public class Library {
 
 
     public void addAlbum(Album album) {
+        if (albums.contains(album)) {
+
+        }
         albums.add(new Album(album));
     }
 
