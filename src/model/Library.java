@@ -22,6 +22,7 @@ public class Library {
             allSongs.addAll(temp.getSongs());
         }
         return allSongs;
+
     }
 
     public ArrayList<String> getAllArtists() {
