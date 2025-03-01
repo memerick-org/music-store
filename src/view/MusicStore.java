@@ -15,8 +15,8 @@ public class MusicStore {
     public MusicStore() {
         File folder= new File("/Users/galiramirez/Downloads/LA 1/albums");
         ArrayList<Album> albumList = readfilesFromFolder(folder);
-        this.store = new Library(new ArrayList<Album>(albumList));
-        this.user = new Library(new ArrayList<Album>());
+        store = new Library(new ArrayList<Album>(albumList));
+        user = new Library(new ArrayList<Album>());
     }
      
     public static ArrayList<Album> readfilesFromFolder(File folder) {
@@ -171,7 +171,9 @@ public class MusicStore {
             // Search for the song in the store
             for (Song song : store.getAllSongs()) {
                 if (song.getTitle().equalsIgnoreCase(songName)) {
-
+                    Album album = (searchAlbumByName(song.getAlbum())).get(0);
+                    album.addSong(song);
+                    user.addAlbum(album);
                     System.out.println("Song added to your library!");
                     return;
                 }
@@ -185,6 +187,7 @@ public class MusicStore {
             // Search for the album in the store
             for (Album album : store.getAllAlbumsDeepCopy()) {
                 if (album.getTitle().equalsIgnoreCase(albumName)) {
+                    user.getAllAlbums().remove(album);
                     user.addAlbum(album);
                     System.out.println("Album added to your library!");
                     return;
@@ -382,7 +385,7 @@ public class MusicStore {
         ArrayList<Song> list = store.getAllSongs();
 
         for (Song song : list) {
-            if (song.getTitle() ==  input) {
+            if (song.getTitle().equals(input)) {
                 results.add(song);
             }
         }
@@ -395,7 +398,7 @@ public class MusicStore {
         ArrayList<Song> list = store.getAllSongs();
 
         for (Song song : list) {
-            if (song.getArtist() == input) {
+            if (song.getArtist().equals(input)) {
                 results.add(song);
             }
         }
@@ -410,7 +413,7 @@ public class MusicStore {
         ArrayList<Album> list = store.getAllAlbums();
 
         for (Album album : list) {
-            if (album.getTitle() == input) {
+            if (album.getTitle().equals(input)) {
                 results.add(album);
             }
         }
@@ -425,7 +428,7 @@ public class MusicStore {
         ArrayList<Album> list = store.getAllAlbums();
 
         for (Album album : list) {
-            if (album.getArtist() == input) {
+            if (album.getArtist().equals(input)) {
                 results.add(album);
             }
         }
