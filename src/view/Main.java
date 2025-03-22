@@ -1,17 +1,17 @@
-/* LARGE ASSIGNMENT #1 - MusicStore
- * Will Snider and Zeenya
+/* LARGE ASSIGNMENT #2 - MusicStore
+ * Will Snider and Zeenya Ramirez
  */
 
 package view;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import model.Album;
 
 public class Main {
     public static void main(String[] args) {
         MusicStore tester = new MusicStore();
-        ArrayList<Album> test = tester.store.getAllAlbums();
+        Collection<Album> test = tester.store.getAllAlbums();
         System.out.println(test.isEmpty());
         tester.mainLoop();
     }
