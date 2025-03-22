@@ -1,32 +1,35 @@
 package model;
 
-import java.util.ArrayList;
+import  java.util.HashSet; 
+import java.util.Set; 
 
 public class Album {
     private String title;
     private String artist;
     private String date;
     private String genre;
-    private ArrayList<Song> songs;
+    private Set<Song> songs;
 
     public Album(Album other) {
         this.title = other.title;
         this.artist = other.artist;
         this.date = other.date;
         this.genre = other.genre;
-        this.songs = new ArrayList<>();
+        this.songs = new HashSet<>();
         for (Song song : other.songs) {
             this.songs.add(new Song(song));
         }
     }
 
-    public Album(String title, String artist, ArrayList<Song> songs, String genre, String date) {
+    public Album(String title, String artist, Set<Song> songs, String genre, String date) {
         this.title = title;
         this.artist = artist;
-        ArrayList<Song> temp = new ArrayList<Song>(songs);
-        this.songs = temp;
         this.genre = genre;
         this.date = date;
+        this.songs = new HashSet<>();
+        for (Song song : songs ){
+            this .songs.add(new Song (song));
+        }
     }
 
     public void addSong(Song song) {
@@ -54,8 +57,11 @@ public class Album {
     }
    
 
-    public ArrayList<Song> getSongs() {
-        ArrayList<Song> copy = new ArrayList<Song>(songs);
+    public Set<Song> getSongs() {
+        Set<Song> copy = new HashSet<>();
+        for (Song song: songs){
+            copy.add(new Song(song));
+        }
         return copy;
     }
 

@@ -1,0 +1,5 @@
+USER: bob
+PLAYLISTS:
+playlist02,rolling in the deep|21|adele;
+playlist01,lovesong|21|adele;
+FAVORITES:
