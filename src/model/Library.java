@@ -154,7 +154,9 @@ public class Library {
 
 
     public void addAlbum(Album album) {
+
         albums.put(album.getTitle().toLowerCase(),new Album(album));
+
     }
 
     public void addSong(Song song) {

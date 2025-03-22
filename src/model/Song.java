@@ -76,4 +76,11 @@ public class Song {
         String favoriteMarker = favorite ? "* " : "";
         return favoriteMarker + "Song: " + title + "\nArtist: " + artist + "\nAlbum: " + album;
     }
+
+    public boolean equals(Song song) {
+        if (this.title.equals(song.title)) {
+            return true;
+        }
+        return false;
+    }
 }

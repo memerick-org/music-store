@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MusicStore {
+
     public Library store;
     private HashMap <String, Album> albumMap; 
     private HashMap <String, Set<Album>> artistAlbumMap;
@@ -38,6 +39,7 @@ public class MusicStore {
         store= new Library(albumMap);
         userLibrary = new Library(new HashMap <>());
         userManager= new UserManager(); 
+
     }
      
     public void readfilesFromFolder(File folder) {
@@ -323,11 +325,13 @@ public class MusicStore {
                 userLibrary.addSong(songMap.get(songName));
                 System.out.println("Song added to your library!");
                 return;
+
             }
             System.out.println("Song not found in store.");
             
         } else if (type.equals("album")) {
             System.out.println("Enter the album name:");
+
             String albumName = scnr.nextLine().trim().toLowerCase();
                        
             if(albumMap.containsKey(albumName)){
