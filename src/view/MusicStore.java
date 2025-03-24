@@ -43,13 +43,12 @@ public class MusicStore {
                         while ((line = reader.readLine()) != null) {
                             line = line.trim();
                             if (!line.isEmpty()) {
-                                Song song = new Song(null, line, artist);
+                                Song song = new Song(title, line, artist);
                                 songList.add(song);
                             }
                         }
 
                         Album album = new Album(title, artist, songList, genre, date);
-                        System.out.println(album.toString());
                         albumList.add(album);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -137,12 +136,12 @@ public class MusicStore {
 
         if (!titleMatches.isEmpty()) {
             System.out.println("Results with matching **Title**:");
-            titleMatches.forEach(item -> System.out.println(item.toString()));
+            titleMatches.forEach(item -> System.out.println(item.toString() + "\n"));
         }
 
         if (!artistMatches.isEmpty()) {
             System.out.println("Results with matching **Artist**:");
-            artistMatches.forEach(item -> System.out.println(item.toString()));
+            artistMatches.forEach(item -> System.out.println(item.toString() + "\n"));
         }
     }
 
@@ -172,8 +171,7 @@ public class MusicStore {
             // Search for the song in the store
             for (Song song : store.getAllSongs()) {
                 if (song.getTitle().equalsIgnoreCase(songName)) {
-                    Album album = (searchAlbumByName(song.getAlbum())).get(0);
-                    album.addSong(song);
+                    Album album = searchAlbumByArtist(song.getArtist()).get(0);
                     user.addAlbum(album);
                     System.out.println("Song added to your library!");
                     return;
@@ -238,8 +236,6 @@ public class MusicStore {
     }
 
     public void playlist(Scanner scnr) {
-        // Implement playlist management logic
-        
         System.out.println("Would you like to make a playlist or edit a playlist?");
         String input= scnr.nextLine().trim().toLowerCase();
 
@@ -265,15 +261,16 @@ public class MusicStore {
             System.out.println("Which playlist will you like to edit");
             String input = scnr.nextLine().trim().toLowerCase();
             ArrayList<Playlist> allPlaylists= store.getAllPlaylists(); 
-            Playlist selectedPlaylist= null;
+            Playlist selectedPlaylist = null;
             for (Playlist p: allPlaylists){
                 if (p.getName().equals(input)){
-                    selectedPlaylist= p;
+                    selectedPlaylist = p;
                     break;
                 }
             }
             if (selectedPlaylist== null){
                 System.out.println("Error: Playlist not found\n");
+                return;
             }
             System.out.println("Would you like to add or remove a song? ");
             String action= scnr.nextLine().trim().toLowerCase();

@@ -73,10 +73,6 @@ public class Library {
         albums.add(new Album(album));
     }
 
-    public void addSong(Song song) {
-        
-    }
-
     public void addPlaylist(Playlist playList){
         playlist.add(playList);
     }
