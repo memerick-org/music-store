@@ -1,0 +1,9 @@
+USER: bob
+PLAYLISTS:
+p2,lovesong|adele
+p1,lovesong|adele
+FAVORITES:
+RECENTLY_PLAYED:
+lovesong|adele
+MOST_FREQUENTLY_PLAYED:
+lovesong|adele,2
