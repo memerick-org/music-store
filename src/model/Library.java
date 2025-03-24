@@ -158,7 +158,7 @@ public class Library {
         albums.put(album.getTitle().toLowerCase(),new Album(album));
 
     }
-
+  
     public void addSong(Song song) {
         if (song== null) return;
         String albumTitle = song.getAlbum().toLowerCase();
@@ -484,6 +484,7 @@ public class Library {
     }
     public int getPlayCount(Song song) {
         return songPlayCount.getOrDefault(song, 0);
+
     }
     public boolean removeSong(String title, String artist) {
         String key = title.toLowerCase() + "|" + artist.toLowerCase();

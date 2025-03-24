@@ -254,12 +254,12 @@ public class MusicStore {
     
         if (!titleMatches.isEmpty()) {
             System.out.println("Results with matching **Title**:");
-            titleMatches.forEach(item -> System.out.println(item.toString()));
+            titleMatches.forEach(item -> System.out.println(item.toString() + "\n"));
         }
     
         if (!artistMatches.isEmpty()) {
             System.out.println("Results with matching **Artist**:");
-            artistMatches.forEach(item -> System.out.println(item.toString()));
+            artistMatches.forEach(item -> System.out.println(item.toString() + "\n"));
         }
     
         if (type.equals("song") && !titleMatches.isEmpty()) {
@@ -441,6 +441,7 @@ public class MusicStore {
     
 
     public void playlist(Scanner scnr) {
+
         
         System.out.println("Would you like to make a playlist or edit a playlist?");
         String input= scnr.nextLine().trim().toLowerCase();
